@@ -66,28 +66,49 @@ python Data/session_1_0_2/step8_visualize_result.py
 EV-Eye/
 ├── Data/
 │   └── session_1_0_2/
-│       ├── events/          # 事件相機數據
-│       ├── frames/          # 幀數據
-│       ├── results_visualization/  # 視覺化結果
-│       ├── best_model.pth   # 訓練好的模型
-│       ├── model.py         # 模型定義
-│       ├── train.py         # 訓練腳本
-│       └── step8_visualize_result.py  # 視覺化腳本
-├── matlab_processed/        # MATLAB 數據處理腳本
-├── unet/                    # U-Net 模型實現
+│       ├── events/              # 事件相機數據 (.txt, .h5)
+│       ├── frames/              # 幀數據 (.png, timestamps.txt)
+│       ├── results_visualization/  # 視覺化結果 (.png)
+│       ├── debug_tools/         # 除錯工具腳本 (可選刪除)
+│       ├── best_model.pth       # 訓練好的模型權重
+│       ├── gaze_labels.npy      # 已標註的注視標籤數據
+│       ├── model.py             # 模型定義
+│       ├── train.py             # 訓練腳本
+│       ├── dataloader_test.py   # 數據載入測試
+│       ├── step8_visualize_result.py  # 視覺化腳本
+│       └── __pycache__/         # Python 快取 (可刪除)
+├── matlab_processed/            # MATLAB 數據處理腳本
+│   ├── *.m                     # MATLAB 腳本
+│   ├── *.txt                   # 處理結果
+│   └── README.md               # MATLAB 設置說明
+├── unet/                        # U-Net 模型實現
 │   ├── unet_model.py
 │   ├── unet_parts.py
-│   └── __init__.py
-├── utils/                   # 工具函數
+│   ├── __init__.py
+│   └── __pycache__/            # Python 快取 (可刪除)
+├── utils/                       # 工具函數
 │   ├── data_loading.py
 │   ├── dice_score.py
-│   └── utils.py
-├── pictures/                # 結果圖片
-├── train.py                 # 主訓練腳本
-├── requirements.txt         # Python 依賴
-├── LICENSE                  # 授權文件
-└── README.md               # 本文件
+│   ├── utils.py
+│   ├── __init__.py
+│   └── __pycache__/            # Python 快取 (可刪除)
+├── update_20_point_user1_session_1_0_2.mat  # MATLAB 標籤數據 (可選刪除)
+├── requirements.txt             # Python 依賴
+├── LICENSE                      # 授權文件
+└── README.md                   # 本文件
 ```
+
+### 數據標註說明
+- **已標註數據**：`Data/session_1_0_2/gaze_labels.npy` - 包含同步後的注視標籤 (x, y 座標)
+- **原始標籤來源**：`update_20_point_user1_session_1_0_2.mat` (MATLAB 處理的標籤數據)
+- **標籤同步**：使用 `debug_tools/step7_sync_labels.py` 將標籤與事件時間戳同步
+
+### 檔案清理建議
+為保持專案整潔，以下檔案可安全刪除：
+- 所有 `__pycache__/` 資料夾 (Python 快取，可重新生成)
+- `Data/session_1_0_2/debug_tools/` (除錯工具，如已完成開發)
+- `Data/session_1_0_2/results_visualization/` (視覺化結果，如不再需要)
+- `update_20_point_user1_session_1_0_2.mat` (如標籤已同步至 .npy)
 
 ## 技術細節
 
@@ -99,6 +120,10 @@ EV-Eye/
 ## 貢獻
 
 歡迎提交 Issue 和 Pull Request！
+
+## 更新日誌
+
+- **2026-01-05**: 更新專案結構說明，添加數據標註和檔案清理建議。
 
 ## 授權
 
