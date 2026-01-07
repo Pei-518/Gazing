@@ -4,11 +4,11 @@ import os
 
 # ================= 🔥 關鍵路徑設定 (寫死最安全) =================
 # 1. 你的資料集資料夾 (這裡面有 frames 和 events 資料夾)
-session_dir = r"D:\Peggy\EV-Eye\Data\session_1_0_2"
+session_dir = r"D:\Peggy\Gazing\Data\session_1_0_2"
 
 # 2. 你的標籤檔案 (這裡假設你把它放在專案最外層，因為你上一步 step6 讀到了)
 # 如果程式說找不到這個，請確認這個 .mat 檔到底在哪裡
-mat_file_path = r"D:\Peggy\EV-Eye\update_20_point_user1_session_1_0_2.mat"
+mat_file_path = r"D:\Peggy\Gazing\update_20_point_user1_session_1_0_2.mat"
 
 # 3. 自動組裝其他路徑
 start_time_file = os.path.join(session_dir, "events", "event_startime.txt")

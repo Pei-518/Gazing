@@ -8,7 +8,7 @@ import os
 
 # ================= 0. 超參數設定 =================
 # 路徑直接指向 session_1_0_2 (因為你的 npy 檔在那裡)
-SESSION_DIR = r"D:\Peggy\EV-Eye\Data\session_1_0_2"
+SESSION_DIR = r"D:\Peggy\Gazing\Data\session_1_0_2"
 BATCH_SIZE = 8
 LEARNING_RATE = 1e-4
 EPOCHS = 10
@@ -37,6 +37,8 @@ optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 
 # ================= 3. 訓練迴圈 =================
 print("🏁 開始正式訓練 (Real Training)...")
+
+best_val_loss = float('inf')  # 初始化最佳驗證損失
 
 for epoch in range(EPOCHS):
     # --- Training Phase ---

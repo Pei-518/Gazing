@@ -51,10 +51,23 @@ class DualStreamGazeModel(nn.Module):
             nn.ReLU(),
             nn.Linear(64, self.output_dim) # 輸出 (Batch, 2)
         )
+        
+        # 🔥 新增 Kappa 校準參數: Zfinal = Zbase + ΔZevent + Zk
+        self.delta_zevent = nn.Linear(self.event_dim, self.output_dim)  # ΔZevent: 事件調整
+        self.zk = nn.Parameter(torch.zeros(self.output_dim))  # Zk: Kappa 調整參數
 
     def forward(self, image, event_voxel):
         feat_i = self.image_backbone(image).flatten(1)
         feat_e = self.event_backbone(event_voxel)
         feat_fused = torch.cat((feat_i, feat_e), dim=1)
-        out = self.regression_head(feat_fused)
-        return out
+        
+        # Zbase: 基礎輸出
+        z_base = self.regression_head(feat_fused)
+        
+        # ΔZevent: 事件調整 (基於事件特徵)
+        delta_z_event = self.delta_zevent(feat_e)
+        
+        # Zfinal = Zbase + ΔZevent + Zk
+        z_final = z_base + delta_z_event + self.zk
+        
+        return z_final

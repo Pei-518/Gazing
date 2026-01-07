@@ -7,7 +7,7 @@ from dataloader_test import EVEyeDataset
 from model import DualStreamGazeModel
 
 # ================= 設定 =================
-SESSION_DIR = r"D:\Peggy\EV-Eye\Data\session_1_0_2"
+SESSION_DIR = r"D:\Peggy\Gazing\Data\session_1_0_2"
 MODEL_PATH = os.path.join(SESSION_DIR, "best_model.pth")
 OUTPUT_DIR = os.path.join(SESSION_DIR, "results_visualization")
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -22,9 +22,9 @@ model = DualStreamGazeModel().to(DEVICE)
 model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
 model.eval()
 
-# 2. 隨機抽取 5 張圖來畫圖
-import random
-indices = random.sample(range(len(dataset)), 5)
+# 2. 使用指定的樣本編號
+# indices = random.sample(range(len(dataset)), 5)
+indices = [1785, 180, 128, 2366, 1664]  # 使用指定的樣本
 
 print(f"🎨 開始繪製預測結果，圖片將存於: {OUTPUT_DIR}")
 

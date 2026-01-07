@@ -4,7 +4,7 @@ import os
 
 # ================= 路徑設定 =================
 # 請將這裡改成你截圖中那個 .h5 檔案的路徑
-h5_path = r"D:\Peggy\EV-Eye\Data\session_1_0_2\events\user1_session_1_0_2.h5"
+h5_path = r"D:\Peggy\Gazing\Data\session_1_0_2\events\user1_session_1_0_2.h5"
 # ===========================================
 
 print(f"📦 正在開箱 H5 檔案: {os.path.basename(h5_path)} ...")
